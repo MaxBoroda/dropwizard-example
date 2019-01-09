@@ -23,7 +23,7 @@ pipeline {
             }
         }
         stage('CopyS3') {
-            step([
+            steps([
                 $class: 'S3BucketPublisher',
                 entries: [[
                     sourceFile: '**/*.jar',
