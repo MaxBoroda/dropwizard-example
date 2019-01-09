@@ -19,9 +19,13 @@ pipeline {
                 always {
                     archiveArtifacts artifacts: '**/*.jar', fingerprint: true
                     junit 'target/surefire-reports/*.xml'
-                    s3Upload consoleLogLevel: 'INFO', dontWaitForConcurrentBuildCompletion: false, pluginFailureResultConstraint: 'FAILURE', profileName: 'S3BucketPublisher', userMetadata: []
                 }
             }
         }
+       stage('S3Copy') {
+           steps {
+               s3CopyArtifact buildSelector: lastSuccessful(), excludeFilter: '', filter: '*.jar', flatten: false, optional: false, projectName: 'dropwizard-example', target: './'
+           }
+       }
     }
 }
