@@ -24,7 +24,7 @@ pipeline {
         }
        stage('S3Copy') {
            steps {
-               s3CopyArtifact buildSelector: lastSuccessful(), excludeFilter: '', filter: '*.jar', flatten: false, optional: false, projectName: 'dropwizard-example', target: './'
+               s3CopyArtifact buildSelector: lastSuccessful(), excludeFilter: '', filter: '*.jar', flatten: false, optional: false, projectName: 'dropwizard-example', target: '**/'
            }
        }
     }
