@@ -22,22 +22,5 @@ pipeline {
                 }
             }
         }
-        stage('CopyS3') {
-            steps([
-                $class: 'S3BucketPublisher',
-                entries: [[
-                    sourceFile: '**/*.jar',
-                    bucket: '30daysdevops',
-                    selectedRegion: 'us-east-1',
-                    noUploadOnFailure: true,
-                    managedArtifacts: true,
-                    flatten: true,
-                    showDirectlyInBrowser: true,
-                    keepForever: true,
-                ]],
-                profileName: 'S3BucketPublisher',
-                dontWaitForConcurrentBuildCompletion: false,
-            ])
-        }
     }
 }
